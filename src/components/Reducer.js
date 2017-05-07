@@ -9,23 +9,29 @@ const initialState = {
   nextNoteId: 1,
   notes: {},
   openNoteId: null,
+  isLoading: false,
 };
 
 //REDUCER(S)
 const handlers = {
   [CREATE_NOTE]: (state, action) => {
-    const id = state.nextNoteId;
+    if (!action.id) {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
     const newNote = {
-      id,
+      id: action.id,
       content: '',
     };
     return {
       ...state,
-      nextNoteId: id + 1,
-      openNoteId: id,
+      isLoading: false,
+      openNoteId: action.id,
       notes: {
         ...state.notes,
-        [id]: newNote,
+        [action.id]: newNote,
       },
     };
   },

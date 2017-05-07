@@ -1,4 +1,6 @@
 // CREATE STORE
+// TODO throws an error when using thunks as these are function redux obviously
+// does not do this
 const validateAction = action => {
   if (!action || typeof action !== 'object' || Array.isArray(action)) {
     throw new Error('Action must be an object');

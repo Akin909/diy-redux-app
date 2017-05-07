@@ -8,16 +8,46 @@ import {
   CLOSE_NOTE,
 } from './../constants';
 
+const createFakeApi = () => {
+  let _id = 0;
+  const createNote = () =>
+    new Promise(resolve =>
+      setTimeout(() => {
+        _id++;
+        resolve({
+          id: `${_id}`,
+        });
+      }, 1000)
+    );
+  return {
+    createNote,
+  };
+};
+
+const api = createFakeApi();
+
 const mapStateToProps = state => ({
   notes: state.notes,
   openNoteId: state.openNoteId,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onAddNote: () =>
+//ACTION CREATOR
+const createNote = () => {
+  return ({ dispatch }) => {
     dispatch({
       type: CREATE_NOTE,
-    }),
+    });
+    api.createNote().then(({ id }) => {
+      dispatch({
+        type: CREATE_NOTE,
+        id,
+      });
+    });
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  onAddNote: () => dispatch(createNote()),
 
   onChangeNote: (id, content) =>
     dispatch({
