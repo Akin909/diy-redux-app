@@ -1,9 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NoteAppContainer from '../src/components/NoteAppContainer';
+import { injectGlobal } from 'styled-components';
+
 import { Provider } from './components/Redux.js';
-import './index.css';
+import NoteAppContainer from '../src/components/NoteAppContainer';
+
 import { CREATE_NOTE, UPDATE_NOTE, OPEN_NOTE, CLOSE_NOTE } from './constants';
+
+injectGlobal`
+  body, html {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: 'Helvetica', sans-serif;
+    box-sizing: border-box;
+  }
+
+  * {
+    box-sizing: inherit;
+    font-family: inherit;
+  }
+`;
 
 const initialState = {
   nextNoteId: 1,
@@ -94,13 +112,15 @@ const createStore = reducer => {
       };
     },
   };
-  store.dispatch({ type: '@@redux/INIT' });
+  store.dispatch({
+    type: '@@redux/INIT',
+  });
   return store;
 };
 
 const store = createStore(reducer);
 
 ReactDOM.render(
-  <Provider store={store}><NoteAppContainer /></Provider>,
+  <Provider store={store}> <NoteAppContainer /> </Provider>,
   document.getElementById('root')
 );
