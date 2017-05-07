@@ -82,10 +82,11 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-const delayMiddleware = () => next => action => {
-  setTimeout(() => {
-    next(action);
-  }, 1000);
+const thunkMiddleware = ({ dispatch, getState }) => next => action => {
+  if (typeof action === 'function') {
+    action({ dispatch, getState });
+  }
+  return next(action);
 };
 
 const loggingMiddleware = ({ getState }) => next => action => {
@@ -97,7 +98,7 @@ const loggingMiddleware = ({ getState }) => next => action => {
 };
 const store = createStore(
   reducer,
-  applyMiddleware(loggingMiddleware, delayMiddleware)
+  applyMiddleware(loggingMiddleware, thunkMiddleware)
 );
 
 ReactDOM.render(
