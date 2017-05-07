@@ -1,14 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import NoteEditor from './NoteEditor';
 import NoteList from './NoteList';
+
+const NoteAppContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ABF0D1;
+`;
 
 const initialState = {
   nextNoteId: 1,
   notes: {},
 };
-
-window.state = initialState;
 
 const NoteApp = ({
   notes,
@@ -19,7 +28,7 @@ const NoteApp = ({
   onCloseNote,
 }) => {
   return (
-    <div>
+    <NoteAppContainer>
       {openNoteId
         ? <NoteEditor
             note={notes[openNoteId]}
@@ -30,7 +39,7 @@ const NoteApp = ({
             <NoteList notes={notes} onOpenNote={onOpenNote} />
             <button onClick={onAddNote}>New Note</button>
           </div>}
-    </div>
+    </NoteAppContainer>
   );
 };
 
