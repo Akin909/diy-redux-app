@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import NoteAppContainer from '../src/components/NoteAppContainer';
-import { Provider } from './components/Redux.js';
+import { Provider } from './../src/components/Redux.js';
 import './index.css';
 import { CREATE_NOTE, UPDATE_NOTE, OPEN_NOTE, CLOSE_NOTE } from './constants';
 

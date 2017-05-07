@@ -1,5 +1,5 @@
 import NoteApp from './NoteApp';
-import { connect } from './Redux';
+import { connect } from './Redux.js';
 
 import {
   CREATE_NOTE,
