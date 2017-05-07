@@ -9,22 +9,22 @@ const Notes = styled.ul`
   text-align: center;
 `;
 const NotesContainer = styled.div`
-  width: 100%;
+  width: 90%;
   height: 70%
   box-shadow: 0px 1px 1px grey;
-  background-color: whitesmoke;
+  background-color:#FFE467;
   margin: 0.5rem;
   padding: 0.5rem;
   outline:0;
 `;
 const NoteList = ({ notes, onOpenNote }) => (
-  <div>
+  <NotesContainer>
     <Notes>
       {Object.keys(notes).map(id => {
         return <NoteLink key={id} note={notes[id]} onOpenNote={onOpenNote} />;
       })}
     </Notes>
-  </div>
+  </NotesContainer>
 );
 
 export default NoteList;

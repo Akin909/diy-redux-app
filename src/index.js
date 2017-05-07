@@ -4,6 +4,8 @@ import { injectGlobal } from 'styled-components';
 
 import NoteAppContainer from '../src/components/NoteAppContainer';
 import { Provider } from './../src/components/Redux.js';
+import { createStore, applyMiddleware } from './components/CreateStore';
+
 import { CREATE_NOTE, UPDATE_NOTE, OPEN_NOTE, CLOSE_NOTE } from './constants';
 
 injectGlobal`
@@ -80,41 +82,23 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-// CREATE STORE
-const validateAction = action => {
-  if (!action || typeof action !== 'object' || Array.isArray(action)) {
-    throw new Error('Action must be an object');
-  }
-  if (typeof action.type === 'undefined') {
-    throw new Error('Action must have a type');
-  }
+const delayMiddleware = () => next => action => {
+  setTimeout(() => {
+    next(action);
+  }, 1000);
 };
 
-const createStore = reducer => {
-  let state = undefined;
-  const subscribers = [];
-  const store = {
-    dispatch: action => {
-      validateAction(action);
-      state = reducer(state, action);
-      subscribers.forEach(handler => handler());
-    },
-    getState: () => state,
-    subscribe: handler => {
-      subscribers.push(handler);
-      return () => {
-        const index = subscribers.indexOf(handler);
-        if (index > 0) {
-          subscribers.splice(index, 1);
-        }
-      };
-    },
-  };
-  store.dispatch({ type: '@@redux/INIT' });
-  return store;
+const loggingMiddleware = ({ getState }) => next => action => {
+  console.info('before', getState());
+  console.info('action', action);
+  const result = next(action);
+  console.info('after', getState());
+  return result;
 };
-
-const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  applyMiddleware(loggingMiddleware, delayMiddleware)
+);
 
 ReactDOM.render(
   <Provider store={store}><NoteAppContainer /></Provider>,

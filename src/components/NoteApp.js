@@ -23,11 +23,6 @@ const Button = styled.button`
   box-shadow: 0px 1px 1px grey;
 `;
 
-const initialState = {
-  nextNoteId: 1,
-  notes: {},
-};
-
 const NoteApp = ({
   notes,
   openNoteId,
