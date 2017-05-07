@@ -10,7 +10,7 @@ const NoteAppContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background-color: #ABF0D1;
 `;
 const NoteListContainer = styled(NoteAppContainer)`
@@ -23,6 +23,13 @@ const Button = styled.button`
   box-shadow: 0px 1px 1px grey;
 `;
 
+const Title = styled.h1`
+  font-family: 'Helvetica', sans-serif;
+  color: whitesmoke;
+  text-shadow: 0px 1px 1px black;
+  text-decoration: underline;
+`;
+
 const NoteApp = ({
   notes,
   openNoteId,
@@ -33,6 +40,7 @@ const NoteApp = ({
 }) => {
   return (
     <NoteAppContainer>
+      <Title>DIY Redux Notes</Title>
       {openNoteId
         ? <NoteEditor
             note={notes[openNoteId]}

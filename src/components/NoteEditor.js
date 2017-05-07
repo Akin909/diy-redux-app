@@ -8,6 +8,7 @@ const EditorContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0.5rem;
 `;
 
 const NewNote = styled(EditorContainer)`
@@ -15,7 +16,6 @@ const NewNote = styled(EditorContainer)`
 `;
 
 const Title = styled.h1`
-  font-family: 
 `;
 
 const NewNoteEditor = styled.textarea`
