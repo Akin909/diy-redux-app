@@ -13,6 +13,15 @@ const NoteAppContainer = styled.div`
   justify-content: center;
   background-color: #ABF0D1;
 `;
+const NoteListContainer = styled(NoteAppContainer)`
+  width: 50%;
+  height: 50%;
+  background-color: whitesmoke;
+`;
+const Button = styled.button`
+  border: none;
+  box-shadow: 0px 1px 1px grey;
+`;
 
 const initialState = {
   nextNoteId: 1,
@@ -35,10 +44,10 @@ const NoteApp = ({
             onChangeNote={onChangeNote}
             onCloseNote={onCloseNote}
           />
-        : <div>
+        : <NoteListContainer>
             <NoteList notes={notes} onOpenNote={onOpenNote} />
-            <button onClick={onAddNote}>New Note</button>
-          </div>}
+            <Button onClick={onAddNote}>New Note</Button>
+          </NoteListContainer>}
     </NoteAppContainer>
   );
 };

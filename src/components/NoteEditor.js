@@ -12,7 +12,10 @@ const EditorContainer = styled.div`
 
 const NewNote = styled(EditorContainer)`
   width: 100%;
-  border: 1px solid black;
+`;
+
+const Title = styled.h1`
+  font-family: 
 `;
 
 const NewNoteEditor = styled.textarea`
@@ -21,6 +24,7 @@ const NewNoteEditor = styled.textarea`
   margin: 0.5rem;
   padding: 0.5rem;
   outline:0;
+  font-size: 1.3rem;
 `;
 
 const Button = styled.button`
@@ -30,11 +34,11 @@ const Button = styled.button`
 
 const NoteEditor = ({ note, onChangeNote, onCloseNote }) => (
   <EditorContainer>
-    Note Editor
+    <Title>Note Editor</Title>
     <NewNote>
       <NewNoteEditor
-        cols={30}
-        rows={10}
+        cols={50}
+        rows={20}
         autoFocus
         value={note.content}
         onChange={event => onChangeNote(note.id, event.target.value)}
